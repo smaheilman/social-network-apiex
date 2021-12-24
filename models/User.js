@@ -1,5 +1,5 @@
 const { Schema, model, Types } = require('mongoose');
-//const dateFormat = require('../utils/dateformat');
+const dateFormat = require('../utils/dateformat');
 
 const FriendSchema = new Schema(
     {
@@ -22,11 +22,14 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validate: {
-
-            }
+            //validate: {
         },
-        thought: [ThoughtSchema],
+        thought: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thought'
+            }
+        ],
         frinds: [FriendSchema]
     }
 )
@@ -34,5 +37,7 @@ const UserSchema = new Schema(
 FriendSchema.virtual('friendCount').get(function() {
     return this.freinds.length;
 });
+
+const User = model('User', UserSchema)
 
 module.exports = User;

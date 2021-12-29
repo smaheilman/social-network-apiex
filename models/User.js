@@ -1,5 +1,4 @@
 const { Schema, model, Types } = require('mongoose');
-const dateFormat = require('../utils/dateformat');
 
 const FriendSchema = new Schema(
     {
@@ -22,7 +21,10 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            //validate: {
+            validate: {
+                validator:() => Promise.resolve(false),
+                message: 'Email validation failed'  
+            }
         },
         thought: [
             {

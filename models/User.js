@@ -21,10 +21,11 @@ const UserSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validate: {
-                validator:() => Promise.resolve(false),
-                message: 'Email validation failed'  
-            }
+            match: [/.+@.+\..+/, 'Please enter a valid e-mail address'],
+            //validate: {
+            //    validator:() => Promise.resolve(false),
+            //    message: 'Email validation failed'  
+            //}
         },
         thought: [
             {

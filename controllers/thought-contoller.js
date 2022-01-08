@@ -16,7 +16,7 @@ const thoughtController = {
             });
     },
     getThoughtById({ params }, res) {
-        Thought.findOne({ _id: params.id })
+        Thought.findOne({ _id: params.thoughtId })
             .populate({
                 path: 'reactions',
                 select:'-__v'
@@ -41,7 +41,7 @@ const thoughtController = {
             .then(({ _id }) => {
                 return User.findOneAndUpdate(
                     { _id: params.userId },
-                    { $push: { thoughts: _id } },
+                    { $push: { thought: _id } },
                     { new: true }
                 );
             })
@@ -88,7 +88,7 @@ const thoughtController = {
                 }
                 return User.findOneAndUpdate(
                     { _id: params.userId },
-                    { $pull: { thoughts: params.thoughtId } },
+                    { $pull: { thought: params.thoughtId } },
                     { new: true }
                 );
             })

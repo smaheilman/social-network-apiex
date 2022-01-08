@@ -33,7 +33,7 @@ const UserSchema = new Schema(
                 ref: 'Thought'
             }
         ],
-        frinds: [FriendSchema]
+        friends: [FriendSchema]
     }
 )
 
